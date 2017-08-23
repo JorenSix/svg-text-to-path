@@ -1,5 +1,3 @@
-require 'svg_glyph'
-require 'enumerable_one'
 
 class SVGFont
   @@font_files_cache = {}
@@ -105,14 +103,14 @@ class SVGFont
     content = []
     block.call(content)
     %{
-      <g data-tspan="#{text}" fill="#{fill_color}" transform="translate(#{x}, #{y}) scale(#{size})">
+      <g fill="#{fill_color}" transform="translate(#{x}, #{y}) scale(#{size})">
         #{content.join("\n")}
       </g>
     }
   end
 
   def pathTag(glyph, advance)
-    %{<path data-glyph="#{glyph.char}" transform="translate(#{advance}) scale(1, -1)" d="#{glyph.path_d}" />}
+    %{<path transform="translate(#{advance}) scale(1, -1)" d="#{glyph.path_d}" />}
   end
 
   def debugBox(glyph, advance, height)
